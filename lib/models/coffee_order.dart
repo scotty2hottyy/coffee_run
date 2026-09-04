@@ -3,21 +3,31 @@
 class CoffeeOrder {
   final String coworkerName;
   final String order;
+  final double price;
 
-  CoffeeOrder({required this.coworkerName, required this.order});
+  CoffeeOrder({
+    required this.coworkerName,
+    required this.order,
+    required this.price,
+  });
 
   Map<String, dynamic> toJson() {
-    return {'coworkerName': coworkerName, 'order': order};
+    return {'coworkerName': coworkerName, 'order': order, 'price': price};
   }
 
   factory CoffeeOrder.fromJson(Map<String, dynamic> json) {
     final coworkerName = json['coworkerName'];
     final order = json['order'];
+    final price = json['price'];
 
     if (coworkerName is! String || order is! String) {
       throw const FormatException('Invalid coffee order data.');
     }
 
-    return CoffeeOrder(coworkerName: coworkerName, order: order);
+    return CoffeeOrder(
+      coworkerName: coworkerName,
+      order: order,
+      price: price is num ? price.toDouble() : 0.0,
+    );
   }
 }

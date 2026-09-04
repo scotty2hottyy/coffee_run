@@ -1,16 +1,15 @@
 // lib/screens/saved_orders_screen.dart
 
 import 'package:flutter/material.dart';
+
 import '../models/coffee_order.dart';
 
 class SavedOrdersScreen extends StatelessWidget {
   final List<CoffeeOrder> savedOrders;
 
-  final void Function(CoffeeOrder order)
-  onUseOrder;
+  final void Function(CoffeeOrder order) onUseOrder;
 
-  final void Function(int index)
-  onDeleteOrder;
+  final void Function(int index) onDeleteOrder;
 
   const SavedOrdersScreen({
     super.key,
@@ -23,10 +22,7 @@ class SavedOrdersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     if (savedOrders.isEmpty) {
       return const Center(
-        child: Text(
-          'No saved orders yet.',
-          style: TextStyle(fontSize: 20),
-        ),
+        child: Text('No saved orders yet.', style: TextStyle(fontSize: 20)),
       );
     }
 
@@ -38,36 +34,26 @@ class SavedOrdersScreen extends StatelessWidget {
 
         return Card(
           child: ListTile(
-            leading: const Icon(
-              Icons.bookmark,
-            ),
-            title: Text(
-              order.coworkerName,
-            ),
+            leading: const Icon(Icons.bookmark),
+            title: Text(order.coworkerName),
             subtitle: Text(
-              order.order,
+              '${order.order}\n\$${order.price.toStringAsFixed(2)}',
             ),
             trailing: Wrap(
               children: [
                 IconButton(
-                  tooltip:
-                  'Add to Coffee Run',
+                  tooltip: 'Add to Coffee Run',
                   onPressed: () {
                     onUseOrder(order);
                   },
-                  icon: const Icon(
-                    Icons.add_circle,
-                  ),
+                  icon: const Icon(Icons.add_circle),
                 ),
                 IconButton(
-                  tooltip:
-                  'Delete Saved Order',
+                  tooltip: 'Delete Saved Order',
                   onPressed: () {
                     onDeleteOrder(index);
                   },
-                  icon: const Icon(
-                    Icons.delete,
-                  ),
+                  icon: const Icon(Icons.delete),
                 ),
               ],
             ),

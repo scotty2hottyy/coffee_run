@@ -127,9 +127,11 @@ class _MainScreenState extends State<MainScreen> {
     } catch (_) {}
   }
 
-  void _addCurrentOrder(String name, String order) {
+  void _addCurrentOrder(String name, String order, double price) {
     setState(() {
-      _currentOrders.add(CoffeeOrder(coworkerName: name, order: order));
+      _currentOrders.add(
+        CoffeeOrder(coworkerName: name, order: order, price: price),
+      );
     });
   }
 
@@ -150,7 +152,11 @@ class _MainScreenState extends State<MainScreen> {
     if (!alreadySaved) {
       setState(() {
         _savedOrders.add(
-          CoffeeOrder(coworkerName: order.coworkerName, order: order.order),
+          CoffeeOrder(
+            coworkerName: order.coworkerName,
+            order: order.order,
+            price: order.price,
+          ),
         );
       });
 
@@ -164,7 +170,11 @@ class _MainScreenState extends State<MainScreen> {
   void _useSavedOrder(CoffeeOrder order) {
     setState(() {
       _currentOrders.add(
-        CoffeeOrder(coworkerName: order.coworkerName, order: order.order),
+        CoffeeOrder(
+          coworkerName: order.coworkerName,
+          order: order.order,
+          price: order.price,
+        ),
       );
 
       _selectedIndex = 0;
